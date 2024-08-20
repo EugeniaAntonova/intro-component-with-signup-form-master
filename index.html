@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+  <script src="./pristine.min.js" type="text/javascript" defer></script>
+  <title>Frontend Mentor | Intro component with sign up form</title>
+
+  <style>
+    :root {
+      --main: hsl(0, 100%, 74%);
+      --accent: hsl(154, 59%, 51%);
+
+
+      --accent-secondary: hsl(248, 32%, 49%);
+
+
+      --text-primary: hsl(249, 10%, 26%);
+      --text-secondary: hsl(246, 25%, 77%);
+    }
+
+    body {
+      margin: 0;
+      color: #fff;
+      font-family: "Poppins", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .main {
+      min-height: 100vh;
+      min-height: 100svh;
+      padding-inline: 24px;
+      background: var(--main) url("./images/bg-intro-mobile.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: repeat-y;
+    }
+
+    .title,
+    .text {
+      margin: 0;
+    }
+
+    .link {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--main);
+    }
+
+    .button {
+      width: 100%;
+      padding: 16px 24px;
+      font: inherit;
+      color: inherit;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      word-spacing: 0.25em;
+      line-height: 1.8;
+      background-color: var(--accent);
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      box-shadow: inset 0 -4px rgba(0 0 0 / .2);
+      outline-color: var(--accent);
+      outline-offset: 3px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      border: 0;
+      padding: 0;
+
+      white-space: nowrap;
+      clip-path: inset(100%);
+      clip: rect(0 0 0 0);
+      overflow: hidden;
+    }
+
+    .hero {
+      display: grid;
+      gap: 60px;
+      padding-block: 90px 70px;
+    }
+
+    .content {
+      text-align: center;
+    }
+
+    .content h1.title {
+      margin-bottom: 24px;
+      font-size: 26px;
+      letter-spacing: 0.03em;
+      line-height: 1.4;
+    }
+
+    .content .text {
+      line-height: 1.63;
+    }
+
+    .cta {
+      margin-bottom: 24px;
+      padding: 20px;
+      border-radius: 12px;
+      background-color: var(--accent-secondary);
+      text-align: center;
+      box-shadow: 0 7px rgba(0 0 0 / .2);
+    }
+
+    form {
+      padding: 24px;
+      border-radius: 12px;
+      background-color: #fff;
+    }
+
+    fieldset {
+      margin-bottom: 15px;
+      padding: 0;
+      border: none;
+      display: grid;
+    }
+
+    input {
+      padding: 18px 16px;
+      border-radius: 4px;
+      border: 1px solid var(--text-secondary);
+      line-height: 1.4;
+      letter-spacing: 0.03em;
+      color: var(--text-primary);
+      font-weight: 700;
+      outline: none;
+      transition: border-color .2s ease-in-out;
+    }
+
+    input.bad-input {
+      border-color: var(--main);
+      color: var(--main);
+      background-image: url('./images/icon-error.svg');
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+
+    input.bad-input::placeholder {
+      color: var(--main);
+    }
+
+    .input-wrapper {
+      display: grid;
+    }
+
+    .input-wrapper:not(:first-of-type) {
+      margin-top: 15px;
+    }
+
+    input:is(:focus-visible, :active) {
+      border-color: var(--text-primary);
+    }
+
+    .error {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--main);
+      font-size: 12px;
+      justify-self: end;
+    }
+
+    @media (hover: hover) {
+      input:hover {
+        border-color: var(--text-primary);
+      }
+    }
+
+    .button-wrapper {
+      display: grid;
+      place-items: center;
+    }
+
+    .button-wrapper .button {
+      margin-bottom: 8px;
+    }
+
+    .button-wrapper small {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    @media (min-width:520px) {
+      .main {
+        background-image: url("./images/bg-intro-desktop.png");
+      }
+    }
+
+    @media (min-width: 800px) {
+      .hero {
+        max-width: 1110px;
+        height: 100vh;
+        height: 100svh;
+        padding: 0;
+        margin: 0 auto;
+        grid-template-columns: 51fr 54fr;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .content {
+        text-align: left;
+      }
+
+      .content h1.title {
+        font-size: 40px;
+        margin-bottom: 28px;
+        letter-spacing: -0.01em;
+        line-height: 1.1;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .content h1.title {
+        font-size: 50px;
+        margin-bottom: 32px;
+      }
+
+      .cta {
+        padding: 16px;
+      }
+
+      form {
+        padding: 40px;
+      }
+
+      fieldset {
+        margin-bottom: 19px;
+      }
+
+      .input-wrapper:not(:first-of-type) {
+        margin-top: 19px;
+      }
+
+      .button-wrapper .button {
+        margin-bottom: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main">
+    <section class="hero">
+      <div class="content">
+        <h1 class="title">Learn to&nbsp;code by watching&nbsp;others</h1>
+        <p class="text">See how experienced developers solve problems in real-time. Watching scripted&nbsp;tutorials is
+          great,
+          but understanding how developers think is invaluable.</p>
+      </div>
+      <div class="interaction">
+        <div class="cta">
+          <p class="text">
+            <b>Try it free 7 days</b> then $20/mo.&nbsp;thereafter
+          </p>
+        </div>
+        <form action="">
+          <fieldset>
+            <legend class="visually-hidden">personal data</legend>
+            <div class="input-wrapper">
+              <label for="firstName" class="visually-hidden">First Name</label>
+              <input type="text" id="firstName" name="firstName" autocomplete="given-name" placeholder="First Name"
+                required maxlength="54" minlength="2" class="input">
+            </div>
+
+            <div class="input-wrapper">
+              <label for="lastName" class="visually-hidden">Last Name</label>
+              <input type="text" id="lastName" name="lastName" autocomplete="family-name" placeholder="Last Name"
+                required maxlength="54" minlength="2" class="input">
+            </div>
+
+            <div class="input-wrapper">
+              <label for="email" class="visually-hidden">Email Address</label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="Email Address" required
+                maxlength="255" minlength="7" class="input">
+            </div>
+
+            <div class="input-wrapper">
+              <label for="password" class="visually-hidden">Password</label>
+              <input type="password" id="password" name="password" autocomplete="new-password" placeholder="Password"
+                required maxlength="25" minlength="8" class="input">
+            </div>
+          </fieldset>
+          <div class="button-wrapper">
+            <button type="submit" class="button">Claim your free trial</button>
+            <small class="text">By clicking the button, you are agreeing to our&nbsp;<a href="#" class="link"
+                target="_blank">Terms&nbsp;and&nbsp;Services</a></small>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+
+  <footer>
+    <p class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="https://www.linkedin.com/in/eugenia-antonova-7b4511276/">Eugenia Antonova</a>.
+    </p>
+  </footer>
+  <script>
+    let pristineConfig = {
+    // class of the parent element where the error/success class is added
+    classTo: 'input',
+    errorClass: 'bad-input',
+    // class of the parent element where error text element is appended
+    errorTextParent: 'input-wrapper',
+
+    errorTextTag: 'span',
+    errorTextClass: 'error' 
+};
+    window.onload = function () {
+
+      let form = document.querySelector('form');
+
+      let pristine = new Pristine(form);
+
+      form.addEventListener('submit', function (evt) {
+        evt.preventDefault();
+
+        var valid = pristine.validate();
+
+      });
+    };
+  </script>
+</body>
+
+</html>
