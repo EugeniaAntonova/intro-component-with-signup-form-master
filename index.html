@@ -145,7 +145,7 @@
       transition: border-color .2s ease-in-out;
     }
 
-    input.bad-input {
+    .has-danger input {
       border-color: var(--main);
       color: var(--main);
       background-image: url('./images/icon-error.svg');
@@ -153,15 +153,15 @@
       background-position: right 16px center;
     }
 
-    input.bad-input::placeholder {
+    .has-danger input::placeholder {
       color: var(--main);
     }
 
-    .input-wrapper {
+    .form-group {
       display: grid;
     }
 
-    .input-wrapper:not(:first-of-type) {
+    .form-group:not(:first-of-type) {
       margin-top: 15px;
     }
 
@@ -169,7 +169,7 @@
       border-color: var(--text-primary);
     }
 
-    .error {
+    .pristine-error {
       font-style: italic;
       font-weight: 500;
       color: var(--main);
@@ -197,6 +197,19 @@
       color: var(--text-secondary);
       font-size: 12px;
       line-height: 1.8;
+    }
+
+    footer {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      translate: -50% 0;
+      font-size: 12px;
+      color: var(--text-primary);
+    }
+
+    .attribution a {
+      color: var(--accent);
     }
 
     @media (min-width:520px) {
@@ -247,7 +260,7 @@
         margin-bottom: 19px;
       }
 
-      .input-wrapper:not(:first-of-type) {
+      .form-group:not(:first-of-type) {
         margin-top: 19px;
       }
 
@@ -276,28 +289,28 @@
         <form action="">
           <fieldset>
             <legend class="visually-hidden">personal data</legend>
-            <div class="input-wrapper">
+            <div class="form-group">
               <label for="firstName" class="visually-hidden">First Name</label>
               <input type="text" id="firstName" name="firstName" autocomplete="given-name" placeholder="First Name"
-                required maxlength="54" minlength="2" class="input">
+                required maxlength="54" minlength="2" class="form-control" data-pristine-required-message="First name cannot be empty">
             </div>
 
-            <div class="input-wrapper">
+            <div class="form-group">
               <label for="lastName" class="visually-hidden">Last Name</label>
               <input type="text" id="lastName" name="lastName" autocomplete="family-name" placeholder="Last Name"
-                required maxlength="54" minlength="2" class="input">
+                required maxlength="54" minlength="2" class="form-control" data-pristine-required-message="Last name cannot be empty">
             </div>
 
-            <div class="input-wrapper">
+            <div class="form-group">
               <label for="email" class="visually-hidden">Email Address</label>
               <input type="email" id="email" name="email" autocomplete="email" placeholder="Email Address" required
-                maxlength="255" minlength="7" class="input">
+                maxlength="255" minlength="7" class="form-control" data-pristine-email-message="Looks like this is not an email" data-pristine-required-message="Email cannot be empty">
             </div>
 
-            <div class="input-wrapper">
+            <div class="form-group">
               <label for="password" class="visually-hidden">Password</label>
               <input type="password" id="password" name="password" autocomplete="new-password" placeholder="Password"
-                required maxlength="25" minlength="8" class="input">
+                required maxlength="25" minlength="8" class="form-control" data-pristine-required-message="Password cannot be empty">
             </div>
           </fieldset>
           <div class="button-wrapper">
@@ -318,18 +331,13 @@
     </p>
   </footer>
   <script>
-    let pristineConfig = {
-    // class of the parent element where the error/success class is added
-    classTo: 'input',
-    errorClass: 'bad-input',
-    // class of the parent element where error text element is appended
-    errorTextParent: 'input-wrapper',
-
-    errorTextTag: 'span',
-    errorTextClass: 'error' 
-};
+    const textInputs = [...document.querySelectorAll('input[type="text"]')];
+    const onTextInput = (evt) => {
+      let key = evt.key;
+      if (!key.match(/[a-z\-\_]|escape|enter|tab|arrow.+|delete|backspace/gi)) evt.preventDefault();
+    }
     window.onload = function () {
-
+      textInputs.forEach(input => input.addEventListener('keydown', onTextInput))
       let form = document.querySelector('form');
 
       let pristine = new Pristine(form);
